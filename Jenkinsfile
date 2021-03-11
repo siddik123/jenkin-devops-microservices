@@ -23,11 +23,17 @@
 //Declarative Piple line
 pipeline {
 	//agent any  //agent is a image where your build will run
-	agent { docker { image 'maven:3.6.3'} } //syntex how to use agen as a docker with image
+	//syntex how to use agen as a MAVEN docker with images
+	//agent { docker { image 'maven:3.6.3'} } 
+	//syntex how to use agen as a NODE docker with images
+	agent { docker { image 'node:15.11'} }
 	stages {
 		stage('Build') {
 			steps {
-					sh 'mvn --version'
+					//for maven
+					//sh 'mvn --version'
+					//For node
+					sh 'node --version'
 					echo "Build"
 			}
 		}
