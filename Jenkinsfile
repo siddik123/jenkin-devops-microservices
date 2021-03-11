@@ -1,39 +1,27 @@
-//Scripted pipeline Old Version
-// node {
-// 	stage('Build') {
-// 		echo "Build"
-// 	}
-// 	stage('Test') {
-// 		echo "Test"
-// 	}
-// 	stage('Integration Test') {
-// 		echo "Integration Test"
-// 	}
-// }
-
-//Scripted pipeline New Version
-// node {
-// 	stage('Build')
-// 		echo "Build"
-// 		echo "Test"
-// 		echo "Integration Test"
-// 		echo "Deployed"
-// }
-
 //Declarative Piple line
 pipeline {
-	agent any  //agent is a image where your build will run
-	//syntex how to use agen as a MAVEN docker with images
+	agent any 
 	//agent { docker { image 'maven:3.6.3'} } 
-	//syntex how to use agen as a NODE docker with images
 	//agent { docker { image 'node:15.11'} }
+	environment {
+		/*Pointing To DockerHome where we install a docker in 
+		a Global variable Configuration injenkins
+		*/
+		dockerHome = tool 'myDocker'
+		/*Pointing To MavenrHome where we install a docker in 
+		a Global variable Configuration injenkins
+		*/
+		mavenHome = tool 'myMaven'
+		//Set the Maven and Docker path to the Bin folder
+		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+	}
 	stages {
 		stage('Build') {
 			steps {
-				//for maven
-				//sh 'mvn --version'
-				//For node
-				//sh 'node --version'
+				//Print maven Version
+				sh 'mvn --version'
+				//Print Docker Version
+				sh 'docker version'
 				echo "Build"
 				echo "PATH - $PATH"
 				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
