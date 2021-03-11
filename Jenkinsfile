@@ -23,36 +23,37 @@
 //Declarative Piple line
 pipeline {
 	agent any  //agent is a image where your build will run
-	stages{
-		stage('Build'){
-			steps{
+	stages {
+		stage('Build') {
+			steps {
 					echo "Build"
 			}
 		}
-		stage('Test'){
-			steps{
+		stage('Test') {
+			steps {
 					echo "Test"
 			}
 		}
-		stage('Integration Test'){
-			steps{
+		stage('Integration Test') {
+			steps {
 					echo "Integration Test"
 			}
 		}
-		stage('Deploy'){
-			steps{
+		stage('Deploy') {
+			steps {
 					echo "Deploy"
 			}
 		}
 	}
-	post{
-		always{
+
+	post {
+		always {
 			echo 'i am awsome always RUN'
 		}
-		success{
+		success {
 			echo 'i am run when build successfull'
 		}
-		failure{
+		failure {
 			echo 'i am run when Build Failed'
 		}
 	}
