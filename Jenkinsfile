@@ -12,10 +12,37 @@
 // }
 
 //Scripted pipeline New Version
-node {
-	stage('Build')
-		echo "Build"
-		echo "Test"
-		echo "Integration Test"
-		echo "Deployed"
+// node {
+// 	stage('Build')
+// 		echo "Build"
+// 		echo "Test"
+// 		echo "Integration Test"
+// 		echo "Deployed"
+// }
+
+//Declarative Piple line
+pipeline {
+	agent any  //agent is a image where your build will run
+	stages{
+		stage('Build'){
+			steps{
+					echo "Build"
+			}
+		}
+		stage('Test'){
+			steps{
+					echo "Test"
+			}
+		}
+		stage('Integration Test'){
+			steps{
+					echo "Integration Test"
+			}
+		}
+		stage('Deploy'){
+			steps{
+					echo "Deploy"
+			}
+		}
+	}
 }
