@@ -45,4 +45,15 @@ pipeline {
 			}
 		}
 	}
+	post{
+		always{
+			echo 'i am awsome always RUN'
+		}
+		success{
+			echo 'i am run when build successfull'
+		}
+		failure{
+			echo 'i am run when Build Failed'
+		}
+	}
 }
