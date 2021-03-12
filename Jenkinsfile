@@ -48,10 +48,40 @@ pipeline {
 					sh "mvn failsafe:integration-test failsafe:verify"
 			}
 		}
+		//Build Jar
+		stage('Package') {
+			steps {
+					sh "mvn package -DskipTests"
+			}
+		}
+
 		stage('Deploy') {
 			steps {
 					echo "Deploy"
 			}
+		}
+	}
+
+	stage('Build Docker Image') {
+			steps {
+				//"docker build -t in28min/currency-exchange-devops:$env.BUILD_TAG"
+				script {
+					//docker.build("in28min/currency-exchange-devops:$env.BUILD_TAG")
+					//or
+					dockerImage = docker.build("m123mmahad/hello-world-java:${env.BUILD_TAG}")
+				}	
+			}
+		}
+		stage('Push Docker Image') {
+			steps {
+				script {
+					//Docker hub credential
+					docker.withRegistry('','dockerhub'){
+					dockerImage.push();
+					dockerImage.push('latest');
+					}
+				}
+			}					
 		}
 	}
 
