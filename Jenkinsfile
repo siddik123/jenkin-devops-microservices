@@ -60,9 +60,7 @@ pipeline {
 					echo "Deploy"
 			}
 		}
-	}
-
-	stage('Build Docker Image') {
+		stage('Build Docker Image') {
 			steps {
 				//"docker build -t in28min/currency-exchange-devops:$env.BUILD_TAG"
 				script {
@@ -80,20 +78,20 @@ pipeline {
 						dockerImage.push();
 						dockerImage.push('latest');
 					}
-				}					
-			}
-		}
-	}
-
-	post {
-		always {
-			echo 'i am awsome always RUN'
-		}
-		success {
-			echo 'i am run when build successfull'
-		}
-		failure {
-			echo 'i am run when Build Failed'
+				}
+			}					
 		}
 	}
 }
+post {
+	always {
+		echo 'i am awsome always RUN'
+	}
+	success {
+		echo 'i am run when build successfull'
+	}
+	failure {
+		echo 'i am run when Build Failed'
+	}
+}
+
