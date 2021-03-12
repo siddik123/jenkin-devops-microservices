@@ -75,14 +75,14 @@ pipeline {
 		stage('Push Docker Image') {
 			steps {
 				script {
-					//Docker hub credential
-					docker.withRegistry('','dockerhub'){
-					dockerImage.push();
-					dockerImage.push('latest');
+					//Docker Hub credential
+					docker.withRegistry('', 'dockerhub'){
+						dockerImage.push();
+						dockerImage.push('latest');
 					}
-				}
+				}					
 			}
-	    }
+		}
 
 	post {
 		always {
